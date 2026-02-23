@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+
+<html lang="it">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Trio Hieracon</title>
+<link href="trio/logo.png" rel="icon"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Raleway:wght@300;400&display=swap');
+    body { font-family: 'Raleway', sans-serif; background-color:#f8f7f3; color:#222; }
+    h1,h2,h3 { font-family:'Playfair Display', serif; }
+
+    .fade-in-left{opacity:0;transform:translateX(-60px);transition:opacity 1.5s ease,transform 1.5s ease}
+    .fade-in{opacity:0;transform:translateY(30px);transition:opacity 1s ease,transform 1s ease}
+    .visible{opacity:1;transform:none}
+
+    .hidden-nav{opacity:0;transform:translateY(-100%);transition:all .3s}
+    .visible-nav{opacity:1;transform:translateY(0)}
+
+    .nav-link{position:relative;transition:color .3s ease}
+    .nav-link.active{color:#a07951}
+    .nav-link.active::after{content:"";position:absolute;left:0;bottom:-6px;width:100%;height:2px;background-color:#a07951}
+
+    .logo-link{position:relative;display:flex;align-items:center;padding-bottom:6px}
+    .logo-link img{height:36px;width:auto;transition:transform .2s ease, opacity .2s ease}
+    .logo-link:hover img{transform:translateY(-1px);opacity:.95}
+    .logo-link.active::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:#a07951}
+
+    @media (min-width:768px){
+      .logo-link img{height:40px}
+    }
+
+/* Language switcher */
+    .lang-btn{
+      display:block;
+      width:40px;
+      height:40px;
+      border-radius:9999px;
+      overflow:hidden;
+      background:transparent;
+      border:2px solid rgba(255,255,255,.95);
+      box-shadow:0 2px 10px rgba(0,0,0,.18);
+      transition:transform .15s ease, box-shadow .15s ease;
+      user-select:none;
+      cursor:pointer;
+    }
+    .lang-btn:hover{ transform:translateY(-1px); box-shadow:0 6px 16px rgba(0,0,0,.22); }
+    .lang-btn.active{ outline:2px solid #a07951; outline-offset:2px; }
+
+    .lang-btn svg{
+      width:100%;
+      height:100%;
+      display:block;
+    }
+@media (max-width:640px){
+      #home{
+        background-position: center top !important;
+        min-height: 100svh;
+        padding-bottom: 5rem;
+      }
+    }
+    @media (prefers-reduced-motion: reduce){
+      .lang-btn{ transition:none; }
+    }
+  </style>
+</head>
+<body class="scroll-smooth">
+  <div class="fixed top-4 right-4 z-[60] flex gap-2" id="lang-switch"><a class="lang-btn active" href="index.html" aria-label="Italiano" title="Italiano">
+      <svg viewBox="0 0 3 2" preserveAspectRatio="xMidYMid slice" role="img" aria-hidden="true">
+        <rect width="1" height="2" x="0" y="0" fill="#009246"></rect>
+        <rect width="1" height="2" x="1" y="0" fill="#F1F2F1"></rect>
+        <rect width="1" height="2" x="2" y="0" fill="#CE2B37"></rect>
+      </svg>
+    </a><a class="lang-btn" href="index_en.html" aria-label="English" title="English">
+      <svg viewBox="0 0 60 30" preserveAspectRatio="xMidYMid slice" role="img" aria-hidden="true">
+        <path fill="#012169" d="M0 0h60v30H0z"></path>
+        <path stroke="#FFF" stroke-width="6" d="M0 0l60 30M60 0L0 30"></path>
+        <path stroke="#C8102E" stroke-width="4" d="M0 0l60 30M60 0L0 30"></path>
+        <path stroke="#FFF" stroke-width="10" d="M30 0v30M0 15h60"></path>
+        <path stroke="#C8102E" stroke-width="6" d="M30 0v30M0 15h60"></path>
+      </svg>
+    </a></div>
+
+  
+<!-- NAV -->
+<nav class="fixed w-full top-0 bg-white shadow-sm py-3 md:py-4 px-4 md:px-6 z-50 hidden-nav" id="main-nav">
+<div class="mx-auto max-w-6xl">
+<div class="flex flex-wrap items-center justify-center gap-5 md:gap-8 uppercase tracking-widest text-[13px] md:text-sm font-light">
+<!-- Logo al posto di Home -->
+<a aria-label="Vai alla Home" class="logo-link" href="#home">
+<img alt="Logo Trio Hieracon" src="trio/logo.png"/>
+</a>
+<a class="nav-link" href="#trio">Trio</a>
+<a class="nav-link" href="#concerti">Concerti</a>
+<a class="nav-link" href="#video">Video</a>
+<a class="nav-link" href="#gallery">Gallery</a>
+<a class="nav-link" href="#contatti">Contatti</a>
+</div>
+</div>
+</nav>
+<!-- HERO (senza logo) -->
+<section class="relative min-h-[100svh] flex items-end pb-20 sm:pb-28 bg-cover bg-center" id="home" style="background-image:url('trio/home.jpg')">
+<div class="absolute inset-0 bg-black/35"></div>
+<div class="container mx-auto px-6 relative">
+<div class="opacity-0 translate-x-[-60px] transition-all duration-[1500ms] delay-[300ms] text-white" id="hero-text">
+<h1 class="text-6xl md:text-8xl uppercase font-bold leading-[0.9]">TRIO<br/>HIERACON</h1>
+<p class="mt-4 text-lg md:text-xl tracking-wide uppercase">Pianoforte  Violino  Violoncello</p>
+</div>
+</div>
+</section>
+<!-- TRIO -->
+<section class="py-24 px-8 bg-white text-center" id="trio">
+<!-- LOGO sopra il titolo -->
+<img alt="Logo Trio Hieracon" class="h-16 md:h-20 w-auto mx-auto mb-6 opacity-90" src="trio/logo.png"/>
+<h2 class="text-3xl font-bold uppercase mb-6 fade-in">Trio Hieracon</h2>
+<div class="max-w-4xl mx-auto text-left text-gray-700 leading-relaxed space-y-4 fade-in">
+<p>
+        Il <strong>Trio Hieracon</strong> nasce a Torino nel 2022 dall’incontro di tre musicisti uniti da un percorso
+        cameristico comune e da una ricerca sonora che attraversa tre secoli di repertorio, con particolare attenzione
+        al Novecento e alla contemporaneità.
+      </p>
+<!-- Segnaposto 7–8 righe -->
+<div class="italic text-gray-600 space-y-2">
+<p>bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla.</p>
+<p>bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla.</p>
+<p>bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla.</p>
+<p>bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla.</p>
+<p>bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla.</p>
+<p>bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla.</p>
+<p>bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla.</p>
+<p>bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla.</p>
+</div>
+<div class="pt-4 flex flex-col sm:flex-row gap-3 justify-center">
+<a class="inline-block bg-black text-white px-6 py-3 rounded-md uppercase text-sm hover:bg-gray-800 transition" href="presskit.pdf" rel="noopener" target="_blank">Press Kit</a>
+        <button id="open-extended" type="button" class="inline-block border border-black text-black px-6 py-3 rounded-md uppercase text-sm hover:bg-gray-100 transition">
+          Versione estesa
+        </button>
+</div>
+</div>
+</section>
+<!-- CONCERTI -->
+<section class="py-24 px-6 bg-[#f5f4f1] text-center" id="concerti">
+<h2 class="text-3xl font-bold uppercase mb-12 fade-in">Concerti</h2>
+<div class="max-w-5xl mx-auto fade-in">
+<div class="grid grid-cols-1 gap-y-8 text-left text-gray-800 text-sm md:text-base">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-gray-300 pb-6">
+<div>
+<p class="text-gray-500 mb-1">15 AGOSTO 2025</p>
+<p class="italic font-semibold">Festival delle Nazioni — Città di Castello</p>
+<p class="text-sm text-gray-600">Programma: Ravel, Shostakovich, Castagnoli</p>
+</div>
+</div>
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-gray-300 pb-6">
+<div>
+<p class="text-gray-500 mb-1">7 SETTEMBRE 2025</p>
+<p class="italic font-semibold">Unione Musicale — Torino</p>
+<p class="text-sm text-gray-600">Ospiti della stagione cameristica</p>
+</div>
+</div>
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-gray-300 pb-6">
+<div>
+<p class="text-gray-500 mb-1">12 OTTOBRE 2025</p>
+<p class="italic font-semibold">Accademia di Santa Cecilia — Roma</p>
+<p class="text-sm text-gray-600">Recital — Beethoven op. 1 n. 1, Ravel Trio</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- VIDEO -->
+<section class="py-24 px-6 bg-white text-center" id="video">
+  <h2 class="text-3xl font-bold uppercase mb-6 fade-in">Video</h2>
+  <p class="max-w-3xl mx-auto mb-12 text-gray-700 fade-in">
+    Alcune esecuzioni e progetti del Trio. Puoi sostituire i link YouTube qui sotto con i vostri video ufficiali.
+  </p>
+
+  <div class="max-w-6xl mx-auto grid gap-10 md:grid-cols-2 text-left fade-in">
+    <!-- VIDEO CARD 1 -->
+    <div class="rounded-2xl overflow-hidden border border-gray-200 shadow-sm">
+      <div class="relative w-full bg-black" style="padding-top:56.25%;">
+        <iframe
+          loading="lazy"
+          class="absolute inset-0 w-full h-full"
+          src="https://www.youtube-nocookie.com/embed/saRo-5GTz1E"
+          title="Riflessi (2024) – Trio Hieracon"
+          frameborder="0"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen></iframe>
+      </div>
+      <div class="p-6">
+        <p class="text-xs uppercase tracking-widest text-gray-500">YouTube</p>
+        <h3 class="text-lg font-semibold mt-1">Riflessi (2024)</h3>
+        <p class="mt-2 text-gray-600">
+          Studio timbrico per trio con pianoforte, dedicato a G. Castagnoli.
+        </p>
+        <a class="inline-flex mt-4 items-center gap-2 text-sm font-medium underline underline-offset-4 hover:opacity-80"
+           href="https://www.youtube.com/watch?v=saRo-5GTz1E" target="_blank" rel="noopener">
+          Apri su YouTube
+        </a>
+      </div>
+    </div>
+
+    <!-- VIDEO CARD 2 -->
+    <div class="rounded-2xl overflow-hidden border border-gray-200 shadow-sm">
+      <div class="relative w-full bg-black" style="padding-top:56.25%;">
+        <!-- Sostituisci il src con il vostro video: https://www.youtube.com/embed/VIDEO_ID -->
+        <iframe
+          loading="lazy"
+          class="absolute inset-0 w-full h-full"
+          src="https://www.youtube-nocookie.com/embed/1X9XUyGikT4"
+          title="Trio Hieracon – Video"
+          frameborder="0"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen></iframe>
+      </div>
+      <div class="p-6">
+        <p class="text-xs uppercase tracking-widest text-gray-500">YouTube</p>
+        <h3 class="text-lg font-semibold mt-1">Altri video</h3>
+        <p class="mt-2 text-gray-600">
+          Selezione di performance, estratti e progetti. Sostituisci questo riquadro con un video specifico.
+        </p>
+        <a class="inline-flex mt-4 items-center gap-2 text-sm font-medium underline underline-offset-4 hover:opacity-80"
+           href="https://youtu.be/1X9XUyGikT4" target="_blank" rel="noopener">
+          Guarda su YouTube
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="py-24 px-8 bg-[#f5f4f1] text-center" id="gallery">
+<h2 class="text-3xl font-bold uppercase mb-8 fade-in">Gallery</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+<img alt="Trio Hieracon - gallery 1" class="rounded-lg shadow-md transform transition duration-700 hover:scale-105 fade-in" src="trio/gallery1.jpg">
+<img alt="Trio Hieracon - gallery 2" class="rounded-lg shadow-md transform transition duration-700 hover:scale-105 fade-in" src="trio/gallery2.jpg">
+<img alt="Trio Hieracon - gallery 3" class="rounded-lg shadow-md transform transition duration-700 hover:scale-105 fade-in" src="trio/gallery3.jpg"/>
+<img alt="Trio Hieracon - gallery 4" class="rounded-lg shadow-md transform transition duration-700 hover:scale-105 fade-in" src="trio/gallery4.jpg"/>
+</img></img></div>
+</section>
+<!-- CONTATTI: SOLO DUE BOTTONI GRANDI -->
+<section class="py-24 px-6 bg-white text-center" id="contatti">
+<h2 class="text-3xl font-bold uppercase mb-10 fade-in">Contatti</h2>
+<div class="max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6 fade-in">
+<!-- EMAIL -->
+<a aria-label="Scrivi una email al Trio Hieracon" class="group rounded-2xl border border-gray-300 bg-white p-8 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition flex flex-col items-center justify-center text-center gap-3" href="mailto:triohieracon@gmail.com?subject=Richiesta%20informazioni%20-%20Trio%20Hieracon&amp;body=Buongiorno%20Trio%20Hieracon,%0D%0A%0D%0Avi%20scrivo%20per%20informazioni%20su...">
+<svg aria-hidden="true" fill="none" height="40" viewbox="0 0 24 24" width="40">
+<path d="M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z" stroke="#a07951" stroke-width="1.5"></path>
+<path d="M21 7l-9 6L3 7" stroke="#a07951" stroke-width="1.5"></path>
+</svg>
+<div class="uppercase tracking-wider text-sm text-gray-700">Email</div>
+<div class="text-2xl font-semibold">triohieracon@gmail.com</div>
+</a>
+<!-- INSTAGRAM -->
+<a aria-label="Apri Instagram del Trio Hieracon" class="group rounded-2xl border border-gray-300 bg-white p-8 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition flex flex-col items-center justify-center text-center gap-3" href="https://www.instagram.com/triohieracon?igsh=dmxoYmlyYmtncXdi" rel="noopener" target="_blank">
+<svg aria-hidden="true" fill="none" height="40" viewbox="0 0 24 24" width="40">
+<rect height="18" rx="5" stroke="#a07951" stroke-width="1.5" width="18" x="3" y="3"></rect>
+<circle cx="12" cy="12" r="4" stroke="#a07951" stroke-width="1.5"></circle>
+<circle cx="17.5" cy="6.5" fill="#a07951" r="1"></circle>
+</svg>
+<div class="uppercase tracking-wider text-sm text-gray-700">Instagram</div>
+<div class="text-2xl font-semibold">@triohieracon</div>
+<div class="text-xs text-gray-500">Inizia a seguirci</div>
+</a>
+</div>
+</section>
+<!-- FOOTER -->
+<footer class="py-8 bg-[#f0efec] text-center text-sm text-gray-500 fade-in">
+<div class="max-w-5xl mx-auto flex flex-col items-center gap-3">
+<img alt="Logo Trio Hieracon" class="h-8 w-auto opacity-80" src="trio/logo.png"/>
+<div>© <span id="year"></span> Trio Hieracon. Tutti i diritti riservati.</div>
+</div>
+</footer>
+<!-- SCRIPT -->
+<script>
+    window.addEventListener('load', () => {
+      const hero = document.getElementById('hero-text');
+      hero.classList.remove('opacity-0','translate-x-[-60px]');
+      hero.classList.add('opacity-100','translate-x-0');
+      document.getElementById('year').textContent = new Date().getFullYear();
+    });
+
+    const nav   = document.getElementById('main-nav');
+    const fades = document.querySelectorAll('.fade-in, .fade-in-left');
+
+    document.querySelectorAll("nav a[href^='#']").forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const id = link.getAttribute('href').replace('#','');
+        const target = document.getElementById(id);
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+
+    const setActiveNav = () => {
+      nav.classList.toggle('visible-nav', window.scrollY > 150);
+      nav.classList.toggle('hidden-nav',  window.scrollY <= 150);
+
+      fades.forEach(el => {
+        if (el.getBoundingClientRect().top < window.innerHeight - 100) el.classList.add('visible');
+      });
+
+      const sections = document.querySelectorAll('section');
+      let current = 'home';
+      sections.forEach(section => {
+        const top = section.offsetTop;
+        const height = section.offsetHeight;
+        if (pageYOffset >= top - 200 && pageYOffset < top + height - 200) current = section.getAttribute('id');
+      });
+
+      document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+      document.querySelectorAll('.logo-link').forEach(l => l.classList.remove('active'));
+
+      if (current === 'home') {
+        document.querySelectorAll('.logo-link').forEach(l => l.classList.add('active'));
+      } else {
+        document.querySelectorAll('.nav-link').forEach(link => {
+          if (link.getAttribute('href').includes(current)) link.classList.add('active');
+        });
+      }
+    };
+    window.addEventListener('scroll', setActiveNav);
+    setActiveNav();
+  </script>
+
+  <!-- EXTENDED PANEL -->
+  <div id="extended-backdrop" class="ext-backdrop" aria-hidden="true"></div>
+
+  <section id="extended-panel" class="ext-panel" role="dialog" aria-modal="true" aria-label="Versione estesa">
+    <div class="ext-header">
+      <h2 class="ext-title">Versione estesa</h2>
+      <button id="close-extended" class="ext-close" aria-label="Close">✕</button>
+    </div>
+
+    <div class="ext-body">
+      <!-- START EXTENDED CONTENT -->
+      <p class="ext-lead">Qui trovi la versione estesa della presentazione. Modifica il testo in questa sezione (cerca: START EXTENDED CONTENT).</p>
+
+      <h3 class="ext-h3">Biografia</h3>
+      <p>…</p>
+
+      <h3 class="ext-h3">Repertorio</h3>
+      <ul class="ext-list">
+        <li>…</li>
+        <li>…</li>
+      </ul>
+
+      <h3 class="ext-h3">Contatti</h3>
+      <p>…</p>
+      <!-- END EXTENDED CONTENT -->
+    </div>
+  </section>
+
+  <style>
+    .ext-backdrop {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.55);
+      opacity: 0; pointer-events: none;
+      transition: opacity .25s ease;
+      z-index: 60;
+    }
+    .ext-backdrop.is-open { opacity: 1; pointer-events: auto; }
+
+    .ext-panel {
+      position: fixed; top: 0; right: 0;
+      width: min(760px, 94vw);
+      height: 100svh;
+      background: rgba(10,10,10,.92);
+      backdrop-filter: blur(10px);
+      transform: translateX(105%);
+      transition: transform .28s ease;
+      z-index: 70;
+      display: flex; flex-direction: column;
+      border-left: 1px solid rgba(255,255,255,.12);
+    }
+    .ext-panel.is-open { transform: translateX(0); }
+
+    .ext-header {
+      display:flex; align-items:center; justify-content:space-between;
+      padding: 18px 18px;
+      border-bottom: 1px solid rgba(255,255,255,.12);
+    }
+    .ext-title { color:#fff; font-size: 18px; font-weight: 700; margin: 0; text-transform: uppercase; letter-spacing: .06em; }
+    .ext-close {
+      color:#fff; background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 999px; padding: 6px 10px;
+      cursor:pointer;
+    }
+    .ext-body {
+      padding: 18px;
+      overflow: auto;
+      color: rgba(255,255,255,.88);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+    .ext-lead { opacity: .95; }
+    .ext-h3 {
+      margin: 20px 0 8px;
+      font-size: 13px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      opacity: .9;
+    }
+    .ext-list { margin: 8px 0 0 18px; }
+  </style>
+
+  <script>
+    (function() {
+      const openBtn = document.getElementById('open-extended');
+      const closeBtn = document.getElementById('close-extended');
+      const panel = document.getElementById('extended-panel');
+      const backdrop = document.getElementById('extended-backdrop');
+
+      function openPanel() {
+        panel.classList.add('is-open');
+        backdrop.classList.add('is-open');
+        backdrop.setAttribute('aria-hidden', 'false');
+        document.documentElement.style.overflow = 'hidden';
+      }
+
+      function closePanel() {
+        panel.classList.remove('is-open');
+        backdrop.classList.remove('is-open');
+        backdrop.setAttribute('aria-hidden', 'true');
+        document.documentElement.style.overflow = '';
+      }
+
+      if (openBtn) openBtn.addEventListener('click', openPanel);
+      if (closeBtn) closeBtn.addEventListener('click', closePanel);
+      if (backdrop) backdrop.addEventListener('click', closePanel);
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closePanel();
+      });
+    })();
+  </script>
+
+</body>
+</html>
